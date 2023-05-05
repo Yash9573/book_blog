@@ -12,6 +12,27 @@ function BookClub(name, description, books, members) {
     let newClub = new BookClub(name, description, books, members);
     return newClub;
   }
+const loginForm = document.querySelector('#login-form');
+
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault(); // prevent the default form submission behavior
+
+  const email = loginForm.email.value;
+  const password = loginForm.password.value;
+
+  // send the email and password to the server for authentication
+  fetch('/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      // handle the server response here
+      console.log(data);
+    });
+});
+
   
   // example usage
   let members = ["Jane", "John", "Bob"];
